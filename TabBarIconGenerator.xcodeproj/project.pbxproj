@@ -12,6 +12,8 @@
 		9DFC29EA24CE8982007D02E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC29E924CE8982007D02E1 /* Assets.xcassets */; };
 		9DFC29ED24CE8982007D02E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC29EC24CE8982007D02E1 /* Preview Assets.xcassets */; };
 		9DFC29F024CE8982007D02E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC29EE24CE8982007D02E1 /* Main.storyboard */; };
+		9DFC29FA24CE89D5007D02E1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC29F824CE89D5007D02E1 /* README.md */; };
+		9DFC29FB24CE89D5007D02E1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC29F924CE89D5007D02E1 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		9DFC29EF24CE8982007D02E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DFC29F124CE8982007D02E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DFC29F224CE8982007D02E1 /* TabBarIconGenerator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabBarIconGenerator.entitlements; sourceTree = "<group>"; };
+		9DFC29F824CE89D5007D02E1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9DFC29F924CE89D5007D02E1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +43,8 @@
 		9DFC29D924CE897F007D02E1 = {
 			isa = PBXGroup;
 			children = (
+				9DFC29F924CE89D5007D02E1 /* LICENSE */,
+				9DFC29F824CE89D5007D02E1 /* README.md */,
 				9DFC29E424CE897F007D02E1 /* TabBarIconGenerator */,
 				9DFC29E324CE897F007D02E1 /* Products */,
 			);
@@ -134,7 +140,9 @@
 			files = (
 				9DFC29F024CE8982007D02E1 /* Main.storyboard in Resources */,
 				9DFC29ED24CE8982007D02E1 /* Preview Assets.xcassets in Resources */,
+				9DFC29FA24CE89D5007D02E1 /* README.md in Resources */,
 				9DFC29EA24CE8982007D02E1 /* Assets.xcassets in Resources */,
+				9DFC29FB24CE89D5007D02E1 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
