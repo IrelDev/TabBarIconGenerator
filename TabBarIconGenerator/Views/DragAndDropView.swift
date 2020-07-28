@@ -49,7 +49,7 @@ struct DragAndDropView: View {
                         
                         let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
                         guard let image = NSImage(contentsOf: url) else { return }
-                        let imageName = url.lastPathComponent
+                        let imageName = url.deletingPathExtension().lastPathComponent
                         self.imageModel = ImageModel(imageName: imageName, image: image)
                     }
                 }
