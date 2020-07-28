@@ -25,7 +25,7 @@ struct ContentView: View {
             .onTapGesture {
                 Presenter.shared.presentNSOpenPanelForFolder { (result) in
                     if case let .success(url) = result {
-                        Presenter.shared.createFolderAtPath(at: url, with: self.imageModel!.imageName)
+                        Presenter.shared.createImageSetFrom(image: self.imageModel!.image, with: self.imageModel!.imageName, at: url)
                     }
                 }
             }
