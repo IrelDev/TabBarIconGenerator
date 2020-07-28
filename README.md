@@ -13,6 +13,7 @@ To install Tab Bar Icon Generator go to [releases](https://github.com/IrelDev/Ta
 
 ## Demo
 <p align="center">  
+<img src = "Assets/MainScreen.png" /><br>
 <img src = "Assets/Demo.gif" /><br>
 </p>
 
