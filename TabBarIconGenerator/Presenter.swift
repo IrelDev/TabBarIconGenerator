@@ -28,7 +28,7 @@ class Presenter {
             if result == .OK,
                 let url = panel.urls.first,
                 let image = NSImage(contentsOf: url) {
-                let imageName = url.lastPathComponent
+                let imageName = url.deletingPathExtension().lastPathComponent
                 
                 completion(.success(ImageModel(imageName: imageName, image: image)))
             } else {
@@ -54,7 +54,16 @@ class Presenter {
             }
         }
     }
-    func createFolderAtPath(at path: URL, with name: String) {
+    func createFolderAtPath(at path: String) {
+        if !FileManager.default.fileExists(atPath: path) {
+            do {
+                try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error.localizedDescription);
+            }
+        }
+    }
+    func createImageSetFrom(image: NSImage, with name: String, at path: URL) {
         let folderPath = path.appendingPathComponent("\(name).imageset")
         var normalizedFolderPath = folderPath.absoluteString
         
@@ -63,12 +72,37 @@ class Presenter {
         normalizedFolderPath = normalizedFolderPath.replacingOccurrences(of: prefix, with: "")
         normalizedFolderPath = normalizedFolderPath.removingPercentEncoding ?? "\(normalizedFolderPath)"
         
-        if !FileManager.default.fileExists(atPath: normalizedFolderPath) {
-            do {
-                try FileManager.default.createDirectory(atPath: normalizedFolderPath, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error.localizedDescription);
-            }
+        createFolderAtPath(at: normalizedFolderPath)
+        
+        let image3x = resizeImage(image: image, width: 75, height: 75)
+        let image2x = resizeImage(image: image, width: 50, height: 50)
+        let image1x = resizeImage(image: image, width: 25, height: 25)
+        
+        saveImage(image: image3x!, path: folderPath.appendingPathComponent("\(name)@3x.png"))
+        saveImage(image: image2x!, path: folderPath.appendingPathComponent("\(name)@2x.png"))
+        saveImage(image: image1x!, path: folderPath.appendingPathComponent("\(name)@1x.png"))
+    }
+    func resizeImage(image: NSImage, width: CGFloat, height: CGFloat) -> NSImage? {
+        let imageSize = NSMakeSize(width, height)
+        
+        let resizedImage = NSImage(size: imageSize)
+        resizedImage.lockFocus()
+        
+        image.draw(in: NSMakeRect(0, 0, imageSize.width, imageSize.height), from: NSMakeRect(0, 0, width, height), operation: .sourceOver, fraction: CGFloat(1))
+        resizedImage.unlockFocus()
+        resizedImage.size = imageSize
+        
+        guard let data = resizedImage.tiffRepresentation, let resultImage = NSImage(data: data) else { return nil }
+        
+        return resultImage
+    }
+    func saveImage(image: NSImage, path: URL) {
+        let imageRep = NSBitmapImageRep(data: image.tiffRepresentation!)
+        let pngData = imageRep?.representation(using: .png, properties: [:])
+        do {
+            try pngData?.write(to: path)
+        } catch {
+            debugPrint(error)
         }
     }
 }
