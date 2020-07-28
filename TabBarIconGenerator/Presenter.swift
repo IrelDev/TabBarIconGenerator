@@ -81,6 +81,8 @@ class Presenter {
         saveImage(image: image3x!, path: folderPath.appendingPathComponent("\(name)@3x.png"))
         saveImage(image: image2x!, path: folderPath.appendingPathComponent("\(name)@2x.png"))
         saveImage(image: image1x!, path: folderPath.appendingPathComponent("\(name)@1x.png"))
+        
+        saveJSON(path: folderPath, imageName: name)
     }
     func resizeImage(image: NSImage, width: CGFloat, height: CGFloat) -> NSImage? {
         let imageSize = NSMakeSize(width, height)
@@ -100,6 +102,42 @@ class Presenter {
         let pngData = imageRep?.representation(using: .png, properties: [:])
         do {
             try pngData?.write(to: path)
+        } catch {
+            debugPrint(error)
+        }
+    }
+    func saveJSON(path: URL, imageName: String) {
+        let json = """
+{
+  "images" : [
+    {
+      "filename" : "\(imageName)@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "\(imageName)@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "\(imageName)@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "https://github.com/IrelDev",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "original"
+  }
+}
+"""
+        do {
+            try json.write(to: path.appendingPathComponent("Contents.json"), atomically: true, encoding: .utf8)
         } catch {
             debugPrint(error)
         }
