@@ -88,12 +88,11 @@ class Presenter {
         let resizedImage = NSImage(size: imageSize)
         resizedImage.lockFocus()
         
-        image.draw(in: NSMakeRect(0, 0, imageSize.width, imageSize.height), from: NSMakeRect(0, 0, width, height), operation: .sourceOver, fraction: CGFloat(1))
+        image.draw(in: NSMakeRect(0, 0, imageSize.width, imageSize.height), from: NSMakeRect(0, 0, image.size.width, image.size.height), operation: .sourceOver, fraction: CGFloat(1))
         resizedImage.unlockFocus()
         resizedImage.size = imageSize
         
         guard let data = resizedImage.tiffRepresentation, let resultImage = NSImage(data: data) else { return nil }
-        
         return resultImage
     }
     func saveImage(image: NSImage, path: URL) {
