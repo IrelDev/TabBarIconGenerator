@@ -23,6 +23,7 @@ struct ContentView: View {
                     .font(.title)
             }
             .onTapGesture {
+                guard self.imageModel != nil else { return }
                 Presenter.shared.presentNSOpenPanelForFolder { (result) in
                     if case let .success(url) = result {
                         Presenter.shared.createImageSetFrom(image: self.imageModel!.image, with: self.imageModel!.imageName, at: url)
