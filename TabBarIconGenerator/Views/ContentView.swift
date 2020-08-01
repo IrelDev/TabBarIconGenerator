@@ -22,6 +22,9 @@ struct ContentView: View {
                 Text("Export")
                     .font(.title)
             }
+            .frame(width: 320, height: 320)
+            .background(Color("CardColor").opacity(0.2))
+            .cornerRadius(20)
             .onTapGesture {
                 guard self.imageModel != nil else { return }
                 Presenter.shared.presentNSOpenPanelForFolder { (result) in
@@ -30,7 +33,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .frame(width: 320)
             Spacer()
         }
         .frame(width: 700, height: 400)
