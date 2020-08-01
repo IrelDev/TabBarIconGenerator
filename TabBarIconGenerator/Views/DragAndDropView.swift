@@ -27,6 +27,10 @@ struct DragAndDropView: View {
                 .frame(width: 320)
             }
         }
+        .background(Image("ImagePlaceholderBackground").resizable().scaledToFill().opacity(0.1).foregroundColor(Color(.labelColor)).background(Color("CardColor").opacity(0.5)))
+        .frame(height: 320)
+        .cornerRadius(20)
+            
         .onTapGesture {
             Presenter.shared.presentNSOpenPanelForImage { (response) in
                 if case let .success(nsOpenPanelResponse) = response {
@@ -34,9 +38,6 @@ struct DragAndDropView: View {
                 }
             }
         }
-        .background(Image("ImagePlaceholderBackground").resizable().scaledToFill().opacity(0.1).foregroundColor(Color(.labelColor)).background(Color(.black).opacity(0.5)))
-        .frame(height: 320)
-        .cornerRadius(10)
             
         .onDrop(of: ["public.url","public.file-url"], isTargeted: nil) { (items) -> Bool in
             guard let item = items.first,
