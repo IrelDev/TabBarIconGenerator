@@ -45,6 +45,7 @@ class Presenter {
         panel.canChooseDirectories = true
         panel.canCreateDirectories = true
         panel.title = "Select folder"
+        panel.prompt = "Save"
         
         panel.begin { (result) in
             if result == .OK, let url = panel.urls.first {
