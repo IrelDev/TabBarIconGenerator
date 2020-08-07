@@ -18,7 +18,17 @@ struct ContentView: View {
                 .frame(width: 320)
             Spacer()
             VStack {
-                Image("SFSquareArrowDown")
+                if #available(macOS 11.0, *) {
+                    Image(systemName: "square.and.arrow.up")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 100)
+                } else {
+                    Image("SFSquareArrowDown")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 100)
+                }
                 Text("Export")
                     .font(.title)
             }

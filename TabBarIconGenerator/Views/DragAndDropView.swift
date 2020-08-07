@@ -19,8 +19,17 @@ struct DragAndDropView: View {
                     .aspectRatio(1, contentMode: .fit)
             } else {
                 VStack {
+                    if #available(macOS 11.0, *) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 100)
+                    } else {
                     Image("SFSquareArrowUp")
-                    
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 100)
+                    }
                     Text("Drag & Drop or Tap")
                         .font(.title)
                 }
