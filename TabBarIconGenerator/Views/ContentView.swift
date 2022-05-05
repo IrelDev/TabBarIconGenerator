@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var imageModel: ImageModel?
-    
+
     var body: some View {
         HStack(alignment: .center) {
             Spacer()
@@ -24,7 +24,7 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 100)
                 } else {
-                    Image("SFSquareArrowDown")
+                    Image("SFSquareArrowUp")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 100)
@@ -37,7 +37,7 @@ struct ContentView: View {
             .cornerRadius(20)
             .onTapGesture {
                 guard self.imageModel != nil else { return }
-                Presenter.shared.presentNSOpenPanelForFolder { (result) in
+                Presenter.shared.presentNSOpenPanelForFolder { result in
                     if case let .success(url) = result {
                         Presenter.shared.createImageSetFrom(image: self.imageModel!.image, with: self.imageModel!.imageName, at: url)
                     }
