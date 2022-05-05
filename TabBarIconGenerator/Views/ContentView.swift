@@ -40,6 +40,11 @@ struct ContentView: View {
                 Presenter.shared.presentNSOpenPanelForFolder { result in
                     if case let .success(url) = result {
                         Presenter.shared.createImageSetFrom(image: self.imageModel!.image, with: self.imageModel!.imageName, at: url)
+                        Presenter.shared.showLastImageset()
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.imageModel = nil
+                        }
                     }
                 }
             }

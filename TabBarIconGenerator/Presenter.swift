@@ -10,6 +10,7 @@ import AppKit
 
 class Presenter {
     public static let shared = Presenter()
+    private var lastImagesetURL: URL?
 
     private init() {}
 
@@ -59,6 +60,7 @@ class Presenter {
     func createImageSetFrom(image: NSImage, with name: String, at path: URL) {
         let folderPath = path.appendingPathComponent("\(name).imageset")
         var normalizedFolderPath = folderPath.absoluteString
+        lastImagesetURL = folderPath
 
         let prefix = "file://"
 
@@ -76,6 +78,14 @@ class Presenter {
         saveImage(image: image1x!, path: folderPath.appendingPathComponent("\(name)@1x.png"))
 
         saveJSON(path: folderPath, imageName: name)
+    }
+
+    func showLastImageset() {
+        guard let url = lastImagesetURL, url.isFileURL else {
+            return
+        }
+
+        NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
     }
 
     private func createFolderAtPath(at path: String) {
